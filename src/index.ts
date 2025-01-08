@@ -11,7 +11,7 @@ import { FormPayment, FormContacts } from './components/common/Forms';
 import { Success } from './components/common/Success';
 import { API_URL } from './utils/constants';
 import { cloneTemplate, ensureElement } from './utils/utils';
-import { ICard } from './types';
+import { ICard } from './types/index';
 import { IPaymentForm, IContactsForm } from './types/index';
 
 // Все шаблоны
@@ -211,6 +211,7 @@ events.on('basket:open', () => {
 		total: appData.getTotal(appData.catalogCards),
 	});
 });
+
 // Блокируем прокрутку страницы если открыта модалка
 events.on('modal:open', () => {
 	page.locked = true;
