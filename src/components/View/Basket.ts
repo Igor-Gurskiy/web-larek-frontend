@@ -43,4 +43,9 @@ export class Basket extends Component<IBasket> {
 	set valid(value: boolean) {
 		this._button.disabled = !value;
 	}
+
+	clearBasket() {
+		this.cardList = [];
+		this.total = 0;
+	}
 }

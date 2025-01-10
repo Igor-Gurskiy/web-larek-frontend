@@ -26,8 +26,13 @@ export class AppState extends Model<IAppState> {
 		this.events.emit('catalog:change', this.catalogCards);
 	}
 
-	clearBasket() {
+	clearOrder() {
 		this.order.items = [];
+		this.order.address = '';
+		this.order.payment = '';
+		this.order.email = '';
+		this.order.phone = '';
+		this.order.total = 0;
 	}
 
 	getTotal(data: ICard[]) {
@@ -42,10 +47,12 @@ export class AppState extends Model<IAppState> {
 
 	deleteCard(id: string) {
 		this.order.items = this.order.items.filter((item) => item !== id);
+		this.events.emit('basket:change', this.order.items);
 	}
 
 	addCard(id: string) {
 		this.order.items.push(id);
+		this.events.emit('basket:change', this.order.items);
 	}
 
 	setPreview(item: ICard) {

@@ -164,7 +164,8 @@ events.on('order:send', () => {
 					total: appData.getTotal(appData.catalogCards),
 				}),
 			});
-			appData.clearBasket();
+			appData.clearOrder();
+			basket.clearBasket();
 			page.counter = appData.order.items.length;
 		})
 		.catch((err) => {
@@ -188,7 +189,7 @@ events.on(
 );
 
 // Изменились элементы корзины
-events.on('basket:open', () => {
+events.on('basket:change', () => {
 	basket.cardList = appData.catalogCards
 		.filter((item) => appData.hasCard(item.id))
 		.map((item, index) => {
