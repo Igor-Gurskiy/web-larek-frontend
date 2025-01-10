@@ -5,9 +5,9 @@ import { ICard, IActions } from '../../types';
 const colorsCategory: Record<string, string> = {
 	'софт-скил': '_soft',
 	'хард-скил': '_hard',
-	'другое': '_other',
-	'дополнительное': '_additional',
-	'кнопка': '_button',
+	другое: '_other',
+	дополнительное: '_additional',
+	кнопка: '_button',
 };
 
 // Класс для карточки в каталоге, корзине и модальном окне
@@ -33,9 +33,7 @@ export class Card extends Component<ICard> {
 		this._addButton = container.querySelector('.card__button');
 
 		this._index = container.querySelector('.basket__item-index');
-		this._removeButton = container.querySelector(
-			'.basket__item-delete'
-		);
+		this._removeButton = container.querySelector('.basket__item-delete');
 
 		if (actions) {
 			if (this._removeButton) {
