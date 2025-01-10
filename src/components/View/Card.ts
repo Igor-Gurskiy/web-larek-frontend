@@ -1,6 +1,6 @@
-import { Component } from './base/Component';
-import { ensureElement } from '../utils/utils';
-import { ICard, IActions } from '../types';
+import { Component } from '../base/Component';
+import { ensureElement } from '../../utils/utils';
+import { ICard, IActions } from '../../types';
 
 const colorsCategory: Record<string, string> = {
 	'софт-скил': '_soft',
@@ -80,14 +80,13 @@ export class Card extends Component<ICard> {
 			this.setText(this._price, `${value} синапсов`);
 		} else {
 			this.setText(this._price, 'Бесценно');
+			if (this._addButton) {
+				this._addButton.disabled = true;
+			}
 		}
 	}
 
-	set textButton(value: boolean) {
-		if (value) {
-			this._addButton.textContent = 'Удалить';
-		} else {
-			this._addButton.textContent = 'В корзину';
-		}
+	set textButton(value: string) {
+		this._addButton.textContent = value;
 	}
 }

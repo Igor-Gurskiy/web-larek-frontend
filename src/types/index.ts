@@ -54,14 +54,12 @@ export interface IOrderResult {
 // Интерфейс состояния приложения
 export interface IAppState {
 	catalogCards: ICard[];
-	basketCards: ICard[];
 	order: IOrder;
 }
 
 // Интерфейс API
 export interface IAppAPI {
 	getCardCatalog: () => Promise<ICard[]>;
-	getCard: (id: string) => Promise<ICard>;
 	setOrder: (order: IOrder) => Promise<IOrderResult>;
 }
 

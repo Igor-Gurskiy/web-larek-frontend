@@ -2,13 +2,13 @@ import './scss/styles.scss';
 
 import { EventEmitter } from './components/base/events';
 import { AppAPI } from './components/AppAPI';
-import { AppState } from './components/AppData';
-import { Page } from './components/Page';
-import { Card } from './components/Card';
-import { Modal } from './components/common/Modal';
-import { Basket } from './components/common/Basket';
-import { FormPayment, FormContacts } from './components/common/Forms';
-import { Success } from './components/common/Success';
+import { AppState } from './components/Model/AppData';
+import { Page } from './components/View/Page';
+import { Card } from './components/View/Card';
+import { Modal } from './components/View/Modal';
+import { Basket } from './components/View/Basket';
+import { FormPayment, FormContacts } from './components/View/Forms';
+import { Success } from './components/View/Success';
 import { API_URL } from './utils/constants';
 import { cloneTemplate, ensureElement } from './utils/utils';
 import { ICard } from './types/index';
@@ -75,9 +75,10 @@ events.on('preview:changed', (item: ICard) => {
 					? events.emit('cardBasket:delete', item)
 					: events.emit('cardBasket:add', item);
 				page.counter = appData.order.items.length;
+				card.textButton = appData.hasCard(item.id) ? 'Удалить' : 'В корзину';
 			},
 		});
-		card.textButton = appData.hasCard(item.id);
+		card.textButton = appData.hasCard(item.id) ? 'Удалить' : 'В корзину';
 		modal.render({
 			content: card.render({
 				title: item.title,
@@ -96,12 +97,10 @@ events.on('preview:changed', (item: ICard) => {
 
 events.on('cardBasket:delete', (item: ICard) => {
 	appData.deleteCard(item.id);
-	modal.close();
 });
 
 events.on('cardBasket:add', (item: ICard) => {
 	appData.addCard(item.id);
-	modal.close();
 });
 
 events.on('formErrors:change', (errors: Partial<IPaymentForm>) => {
@@ -151,7 +150,7 @@ events.on('formContacts:change', () => {
 	contacts.valid = contacts.validationFormContacts();
 });
 
-events.on('success:open', () => {
+events.on('order:send', () => {
 	api
 		.setOrder(appData.order)
 		.then(() => {
@@ -197,7 +196,6 @@ events.on('basket:open', () => {
 				onClick: () => {
 					events.emit('cardBasket:delete', item);
 					page.counter = appData.order.items.length;
-					events.emit('basket:open');
 				},
 			});
 			return card.render({

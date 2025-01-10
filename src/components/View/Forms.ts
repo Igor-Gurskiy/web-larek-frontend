@@ -125,7 +125,7 @@ export class FormContacts extends Form<IContactsForm> {
 
 		this.container.addEventListener('submit', (evt: Event) => {
 			evt.preventDefault();
-			this.events.emit('success:open');
+			this.events.emit('order:send');
 		});
 	}
 

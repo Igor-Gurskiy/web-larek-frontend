@@ -1,13 +1,7 @@
-import { Component } from './base/Component';
-import { IEvents } from './base/events';
-import { ensureElement } from '../utils/utils';
-import { IPage } from '../types';
-
-// // Интерфейс страницы
-// interface IPage {
-// 	catalog: ICard[];
-// 	counter: number;
-// }
+import { Component } from '../base/Component';
+import { IEvents } from '../base/events';
+import { ensureElement } from '../../utils/utils';
+import { IPage } from '../../types';
 
 export class Page extends Component<IPage> {
 	protected _catalog: HTMLElement;

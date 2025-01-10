@@ -1,4 +1,4 @@
-import { Model } from './base/Model';
+import { Model } from '../base/Model';
 import {
 	FormErrors,
 	ICard,
@@ -6,11 +6,10 @@ import {
 	IOrder,
 	IPaymentForm,
 	IContactsForm,
-} from '../types';
+} from '../../types';
 
 export class AppState extends Model<IAppState> {
 	catalogCards: ICard[] = [];
-	basketCards: ICard[];
 	order: IOrder = {
 		items: [],
 		total: 0,

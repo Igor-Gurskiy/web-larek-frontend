@@ -6,12 +6,6 @@ export class AppAPI extends Api implements IAppAPI {
 		super(baseUrl, options);
 	}
 
-	getCard(id: string): Promise<ICard> {
-		return this.get(`/product/${id}`).then((item: ICard) => {
-			return item;
-		});
-	}
-
 	getCardCatalog(): Promise<ICard[]> {
 		return this.get('/product').then((data: ApiListResponse<ICard>) => {
 			return data.items;
